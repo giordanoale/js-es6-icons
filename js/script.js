@@ -157,3 +157,34 @@ iconColored.forEach(icon => {
   return html.append(iconShow);
 
 });
+
+const select = $("#type");
+
+iconCategories.forEach ((item) => {
+  const optionHtml = `<option value="${item}">${item}<option>`;
+  select.append(optionHtml);
+});
+
+select.change(function(){
+  const optionSelected = $(this).val();
+
+  const iconFiltered = iconColored.filter((icon) => {
+    return icon.category ==  optionSelected;
+  });
+
+  html.html("");
+
+  iconFiltered.forEach(icon => {
+
+    const {name, prefix, family, color} = icon;
+    
+    const iconShow = `<div>
+    <i class="${icon.family} ${icon.prefix}${icon.name}" style="color:${icon.color}"></i>
+    <div class="title">${icon.name}</div>
+    </div>`;
+  
+    return html.append(iconShow);
+  
+  });
+
+});
