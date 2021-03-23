@@ -117,3 +117,17 @@ const icons = [
     category: "animal"
   },
 ];
+
+const html = $(".icons")
+
+icons.forEach(item => {
+
+  const {name, prefix, family} = item;
+  
+  const iconShow = `<div>
+  <i class="${item.family} ${item.prefix}${item.name}"></i>
+  <div class="title">${item.name}</div>
+  </div>`;
+
+  return html.append(iconShow);
+});
