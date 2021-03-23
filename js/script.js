@@ -120,14 +120,40 @@ const icons = [
 
 const html = $(".icons")
 
-icons.forEach(item => {
+const colors = ["green", "red", "blue"];
+const iconCategories = [];
 
-  const {name, prefix, family} = item;
+
+icons.forEach((item, i) => {
+
+  if (iconCategories.includes(item.category) == false){
+    iconCategories.push(item.category);
+  }
+
+});
+
+// console.log(iconCategories);
+
+const iconColored = icons.map((icon) => {
+  const categoryIndex = iconCategories.indexOf(icon.category);
+  const colorItem = colors[categoryIndex];
+
+  icon.color = colorItem;
+
+  return icon;
+});
+
+console.log(icons);
+
+iconColored.forEach(icon => {
+
+  const {name, prefix, family, color} = icon;
   
   const iconShow = `<div>
-  <i class="${item.family} ${item.prefix}${item.name}"></i>
-  <div class="title">${item.name}</div>
+  <i class="${icon.family} ${icon.prefix}${icon.name}" style="color:${icon.color}"></i>
+  <div class="title">${icon.name}</div>
   </div>`;
 
   return html.append(iconShow);
+
 });
